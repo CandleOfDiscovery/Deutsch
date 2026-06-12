@@ -1,0 +1,142 @@
+services:
+  auth-service:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+      args:
+        SERVICE_DIR: backend/auth-service
+    environment:
+      PORT: 8001
+      AUTH_DB_NAME: /data/db.sqlite3
+    command: sh -c "python manage.py migrate --noinput && python manage.py seed_demo_users && python manage.py runserver 0.0.0.0:8001"
+    ports:
+      - "8001:8001"
+    volumes:
+      - auth_data:/data
+
+  lessons-service:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+      args:
+        SERVICE_DIR: backend/lessons-service
+    environment:
+      PORT: 8002
+    command: python manage.py runserver 0.0.0.0:8002
+    ports:
+      - "8002:8002"
+
+  vocabulary-service:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+      args:
+        SERVICE_DIR: backend/vocabulary-service
+    environment:
+      PORT: 8003
+    command: python manage.py runserver 0.0.0.0:8003
+    ports:
+      - "8003:8003"
+
+  grammar-service:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+      args:
+        SERVICE_DIR: backend/grammar-service
+    environment:
+      PORT: 8004
+    command: python manage.py runserver 0.0.0.0:8004
+    ports:
+      - "8004:8004"
+
+  exam-service:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+      args:
+        SERVICE_DIR: backend/exam-service
+    environment:
+      PORT: 8005
+    command: python manage.py runserver 0.0.0.0:8005
+    ports:
+      - "8005:8005"
+
+  speaking-service:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+      args:
+        SERVICE_DIR: backend/speaking-service
+    environment:
+      PORT: 8006
+    command: python manage.py runserver 0.0.0.0:8006
+    ports:
+      - "8006:8006"
+
+  writing-service:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+      args:
+        SERVICE_DIR: backend/writing-service
+    environment:
+      PORT: 8007
+    command: python manage.py runserver 0.0.0.0:8007
+    ports:
+      - "8007:8007"
+
+  progress-service:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+      args:
+        SERVICE_DIR: backend/progress-service
+    environment:
+      PORT: 8008
+    command: python manage.py runserver 0.0.0.0:8008
+    ports:
+      - "8008:8008"
+
+  tutor-service:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+      args:
+        SERVICE_DIR: backend/tutor-service
+    environment:
+      PORT: 8009
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      OPENAI_MODEL: ${OPENAI_MODEL:-gpt-5.2}
+    command: python manage.py runserver 0.0.0.0:8009
+    ports:
+      - "8009:8009"
+
+  frontend:
+    build:
+      context: frontend
+    environment:
+      VITE_AUTH_API_URL: http://localhost:8001
+      VITE_LESSONS_API_URL: http://localhost:8002
+      VITE_VOCABULARY_API_URL: http://localhost:8003
+      VITE_GRAMMAR_API_URL: http://localhost:8004
+      VITE_EXAM_API_URL: http://localhost:8005
+      VITE_SPEAKING_API_URL: http://localhost:8006
+      VITE_WRITING_API_URL: http://localhost:8007
+      VITE_PROGRESS_API_URL: http://localhost:8008
+      VITE_TUTOR_API_URL: http://localhost:8009
+    ports:
+      - "5173:5173"
+    depends_on:
+      - auth-service
+      - lessons-service
+      - vocabulary-service
+      - grammar-service
+      - exam-service
+      - speaking-service
+      - writing-service
+      - progress-service
+      - tutor-service
+
+volumes:
+  auth_data:

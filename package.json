@@ -1,0 +1,10 @@
+{
+  "name": "deutschmeister-prototype",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "bash scripts/dev.sh",
+    "docker:up": "docker compose up --build",
+    "docker:down": "docker compose down"
+  }
+}

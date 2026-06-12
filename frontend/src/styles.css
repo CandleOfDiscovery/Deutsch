@@ -1,0 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Serif:wght@500;600;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root { color-scheme: light; }
+.dark { color-scheme: dark; }
+* { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  min-width: 320px;
+  background: #F8F9FA;
+  color: #121212;
+  font-family: Inter, system-ui, sans-serif;
+}
+.dark body { background: #121212; color: #F8F9FA; }
+.hero-overlay { background: linear-gradient(100deg, rgba(18,18,18,.72), rgba(26,60,110,.48), rgba(26,60,110,.12)); }
+.glass { backdrop-filter: blur(20px); background: rgba(255,255,255,.78); }
+.dark .glass { background: rgba(18,18,18,.72); }
+.card-lift { transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease; }
+.card-lift:hover { transform: translateY(-8px); box-shadow: 0 26px 80px rgba(26,60,110,.18); }
+.text-balance { text-wrap: balance; }
