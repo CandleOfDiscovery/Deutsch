@@ -1,4 +1,4 @@
-import { BookOpen, Brain, GraduationCap, MessageCircle, Mic, PenLine, Sparkles, Trophy, UserRound, Volume2 } from 'lucide-react'
+import { BookOpen, Bot, Brain, GraduationCap, MessageCircle, Mic, PenLine, Sparkles, Trophy, UserRound, Volume2 } from 'lucide-react'
 
 export const navItems = [
   { label: 'Learn', to: '/learn' },
@@ -13,6 +13,7 @@ export const features = [
   { service: 'grammar', title: 'Grammar', icon: Brain, description: 'Clear grammar explainers with gentle, contextual drills.' },
   { service: 'exam', title: 'Exams', icon: GraduationCap, description: 'Goethe and telc-style prep flows for every CEFR milestone.' },
   { service: 'speaking', title: 'Speaking', icon: Mic, description: 'Conversational prompts and pronunciation coaching.' },
+  { service: 'tutor', title: 'AI Tutor', icon: Bot, description: 'A CEFR-aware German tutor that answers questions and creates practice prompts.' },
   { service: 'writing', title: 'Writing', icon: PenLine, description: 'Guided letters, emails, and essays with rubric feedback.' },
 ]
 

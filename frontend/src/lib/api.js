@@ -10,6 +10,7 @@ const urls = {
   speaking: env.VITE_SPEAKING_API_URL || 'http://localhost:8006',
   writing: env.VITE_WRITING_API_URL || 'http://localhost:8007',
   progress: env.VITE_PROGRESS_API_URL || 'http://localhost:8008',
+  tutor: env.VITE_TUTOR_API_URL || 'http://localhost:8009',
 }
 
 export const tokenStore = {
@@ -33,10 +34,17 @@ const servicePaths = {
   speaking: '/api/speaking/',
   writing: '/api/writing/',
   progress: '/api/progress/',
+  tutor: '/api/tutor/chat/',
 }
 
 export async function callService(service, payload = {}) {
   const client = axios.create({ baseURL: urls[service] })
   const { data } = await client.post(servicePaths[service] || '/', payload)
+  return data
+}
+
+export async function callTutor({ message, level = 'A2', focus = 'speaking confidence' }) {
+  const client = axios.create({ baseURL: urls.tutor })
+  const { data } = await client.post('/api/tutor/chat/', { message, level, focus })
   return data
 }

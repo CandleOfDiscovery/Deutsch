@@ -9,5 +9,6 @@ python backend/exam-service/manage.py runserver 8005 &
 python backend/speaking-service/manage.py runserver 8006 &
 python backend/writing-service/manage.py runserver 8007 &
 python backend/progress-service/manage.py runserver 8008 &
+python backend/tutor-service/manage.py runserver 8009 &
 npm --prefix frontend run dev &
 wait
